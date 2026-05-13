@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Trip Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Styles for Trip Plan Page */
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Poppins', sans-serif;
+        }
+        .trip-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 3rem;
+        }
+        .trip-container h2 {
+            font-size: 2rem;
+            color: #4c51bf;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .trip-container p {
+            font-size: 1.125rem;
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+        .trip-container .text-indigo-500 {
+            color: #5a67d8;
+        }
+        .itinerary {
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        .itinerary h3 {
+            font-size: 1.5rem;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .itinerary ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .itinerary li {
+            padding-bottom: 1rem;
+        }
+        .itinerary li strong {
+            font-size: 1.125rem;
+            color: #2c5282;
+            font-weight: 600;
+        }
+        .itinerary li ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        .itinerary li ul li {
+            font-size: 1rem;
+            color: #4a5568;
+        }
+        .itinerary li:last-child {
+            padding-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="trip-container">
+        <h2>Your Trip Plan</h2>
+
+        <!-- Trip Information -->
+        <div class="mb-6">
+            <p class="text-xl font-medium text-gray-700">Start Date: <span class="text-indigo-500">{{ start_date }}</span></p>
+            <p class="text-xl font-medium text-gray-700">Duration: <span class="text-indigo-500">{{ duration }} Days</span></p>
+        </div>
+
+        <!-- Itinerary -->
+        <div class="itinerary">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Itinerary</h3>
+            <ul class="space-y-4">
+                {% for day, places in itinerary.items %}
+                    <li class="border-b border-gray-300 pb-4">
+                        <h4 class="text-xl font-semibold text-indigo-600 mb-2"> {{ day }}</h4>
+                        <ul class="list-inside list-disc text-gray-700">
+                            {% for place in places %}
+                                <li class="mb-2">{{ place }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

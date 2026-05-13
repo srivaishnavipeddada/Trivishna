@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: url('/static/images/colorful-wallpaper-background-multicolored-generative-ai.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.auth-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem 2.5rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.input-box {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: 0.3s ease;
+  color: #777; /* Default color for label */
+}
+
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label {
+  top: -0.75rem;
+  font-size: 0.8rem;
+  color: #007bff; /* Color when label is above the input */
+}
+
+.input-box input:valid + label,
+.input-box input:not(:focus):valid + label {
+  top: -0.75rem;
+  font-size: 0.8rem;
+  color: #007bff; /* Color when input has a valid value */
+}
+
+.input-box input:focus + label,
+.input-box input:not(:focus):invalid + label {
+  color: #ff0000; /* Color for invalid input (e.g., red) */
+}
+
+
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.bottom-text {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}

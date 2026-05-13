@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookings - Trivishna</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        .emoji.bookings {
+            color: #007bff;
+        }
+
+        .heading-text {
+            background: linear-gradient(to right, #007bff, #00c6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f5f5f5;
+            color: #444;
+            font-size: 0.95em;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid #ddd;
+        }
+
+        td {
+            padding: 16px 18px;
+            text-align: left;
+            font-size: 0.95em;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .badge-verified {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-pending {
+            background: #6c757d;
+            color: white;
+        }
+
+        .cancel-button {
+            background-color: #e63946;
+            color: white;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .cancel-button:hover {
+            background-color: #c82333;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            color: #888;
+        }
+
+        /* Optional: Add spacing between each row */
+        tr.booking-row {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="section">
+            <h2><span class="emoji bookings">🧾</span><span class="heading-text">My Bookings</span></h2>
+
+            {% if bookings %}
+                <table>
+                    <tr>
+                        <th>Package</th>
+                        <th>Preferred Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for booking in bookings %}
+                        <tr class="booking-row">
+                            <td>{{ booking.package.name }}</td>
+                            <td>{{ booking.preferred_date|date:"F d, Y" }}</td>
+                            <td>
+                                {% if booking.status == "Cancelled" %}
+                                    <span class="badge badge-pending">Cancelled</span>
+                                {% else %}
+                                    <span class="badge badge-verified">{{ booking.status }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if booking.status != "Cancelled" %}
+                                    <form method="post" action="{% url 'cancel_booking' booking.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="cancel-button">❌ Cancel</button>
+                                    </form>
+                                {% else %}
+                                    <span style="color: #999;">—</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="no-data">You have no bookings yet.</div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

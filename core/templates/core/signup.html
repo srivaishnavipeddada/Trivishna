@@ -1,0 +1,54 @@
+<!-- templates/signup.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 to-purple-500">
+  <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-lg">
+    <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-6">Create Your Account</h2>
+
+    <!-- Display messages here -->
+    
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="space-y-6">
+
+        <!-- Username -->
+        <div class="flex flex-col">
+          <label for="id_username" class="text-gray-700 font-semibold">Username</label>
+          <input type="text" name="username" id="id_username" required class="border-2 border-gray-300 p-2 rounded-lg" placeholder="Username" />
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col">
+          <label for="id_email" class="text-gray-700 font-semibold">Email</label>
+          <input type="email" name="email" id="id_email" required class="border-2 border-gray-300 p-2 rounded-lg" placeholder="Email" />
+        </div>
+
+        <!-- Password -->
+        <div class="flex flex-col">
+          <label for="id_password1" class="text-gray-700 font-semibold">Password</label>
+          <input type="password" name="password1" id="id_password1" required class="border-2 border-gray-300 p-2 rounded-lg" placeholder="Password" />
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="flex flex-col">
+          <label for="id_password2" class="text-gray-700 font-semibold">Confirm Password</label>
+          <input type="password" name="password2" id="id_password2" required class="border-2 border-gray-300 p-2 rounded-lg" placeholder="Confirm Password" />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition-all ease-in-out duration-200">
+          Sign Up
+        </button>
+      </div>
+    </form>
+
+    <!-- Login Link -->
+    <p class="text-sm text-center text-gray-600 mt-6">
+      Already have an account?
+      <a href="{% url 'login' %}" class="text-indigo-600 hover:underline">Login here</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

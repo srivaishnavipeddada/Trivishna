@@ -1,0 +1,138 @@
+{% block content %}
+<!-- Single File Login Page with CSS -->
+<div class="container">
+    <div class="brand-title">TRIVISHNA</div>
+    <div class="inputs">
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Username Field -->
+            <label for="id_username">Username</label>
+            {{ form.username }}
+
+            <!-- Password Field -->
+            <label for="id_password">Password</label>
+            {{ form.password }}
+
+            <!-- Submit Button -->
+            <button type="submit">LOGIN</button>
+        </form>
+    </div>
+    
+    <!-- Signup Link -->
+    <p class="text-sm text-center text-gray-600 mt-4">
+        New here?
+        <a href="{% url 'signup' %}" class="text-green-600 hover:underline">Create an account</a>
+    </p>
+    <p class="text-sm text-center mt-4">
+        <a href="{% url 'password_reset' %}" class="text-blue-600 hover:underline text-xs">
+            Forgot your password?
+        </a>
+    </p>
+</div>
+
+<!-- Inline CSS Styling -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap');
+
+  input {
+    caret-color: red;
+  }
+
+  body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(45deg, #6a11cb, #2575fc); /* Gradient background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+  }
+
+  .container {
+    position: relative;
+    width: 380px;
+    padding: 40px;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 -5px 15px rgba(255, 255, 255, 0.1);
+  }
+
+  .brand-title {
+    font-weight: 900;
+    font-size: 2rem;
+    color: #1DA1F2;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .inputs {
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  label {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #333;
+    display: block;
+  }
+
+  input {
+    background: #f1f1f1;
+    padding: 12px;
+    padding-left: 20px;
+    font-size: 14px;
+    border-radius: 25px;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    box-shadow: inset 6px 6px 10px rgba(0, 0, 0, 0.05), inset -6px -6px 10px rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+  }
+
+  input:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.7);
+    border-color: #1DA1F2;
+  }
+
+  button {
+    width: 100%;
+    background: #1DA1F2;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  button:hover {
+    background: #1689C3;
+    transform: translateY(-2px);
+  }
+
+  a {
+    font-size: 12px;
+    color: #1DA1F2;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  p.text-center {
+    font-size: 13px;
+    color: #888;
+  }
+</style>
+
+{% endblock %}

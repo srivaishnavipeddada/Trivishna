@@ -1,0 +1,25 @@
+<div class="review-section">
+    <h2>Reviews</h2>
+
+    {% if reviews %}
+        {% for review in reviews %}
+            <div class="review">
+                <p><strong>{{ review.user.username }}</strong> says:</p>
+                <p>{{ review.comment }}</p>
+                <p><em>{{ review.created_at }}</em></p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No reviews yet for this package.</p>
+    {% endif %}
+
+    <div class="review-form">
+        <h3>Leave a Review</h3>
+        <form method="post" action="{% url 'submit_review' package.id %}">
+            {% csrf_token %}
+            <textarea name="comment" required placeholder="Write your review here..."></textarea>
+            <br>
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+</div>

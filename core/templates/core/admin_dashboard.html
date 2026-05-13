@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="margin-bottom: 20px;">Admin Dashboard</h2>
+
+<div style="display: flex; flex-direction: column; gap: 20px;">
+    <div style="background: #e8f5e9; padding: 15px; border-radius: 8px;">
+        <strong>Total Packages:</strong> {{ total_packages }}
+    </div>
+    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px;">
+        <strong>Total Bookings:</strong> {{ total_bookings }}
+    </div>
+    <div style="background: #fff3e0; padding: 15px; border-radius: 8px;">
+        <strong>Total Users:</strong> {{ total_users }}
+    </div>
+
+    <div style="margin-top: 20px;">
+        <h3>Recent Bookings</h3>
+        <ul style="list-style: none; padding-left: 0;">
+            {% for booking in recent_bookings %}
+                <li style="border-bottom: 1px solid #ccc; padding: 10px 0;">
+                    {{ booking.user.username }} booked <strong>{{ booking.package.name }}</strong> on {{ booking.booked_at|date:"M d, Y H:i" }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

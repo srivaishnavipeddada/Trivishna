@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Success</title>
+  {% load static %}
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to right, #8f94fb, #4e54c8);
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .panel-container {
+      background-color: #12192c;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      font-size: 90%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px;
+      max-width: 400px;
+      color: #4e54c8;
+      margin: 10% auto 2% auto;
+    }
+
+    .panel-container strong {
+      line-height: 20px;
+    }
+
+    .ratings-container {
+      display: flex;
+      margin: 20px 0;
+    }
+
+    .rating {
+      flex: 1;
+      cursor: pointer;
+      padding: 20px;
+      margin: 10px 5px;
+    }
+
+    .rating:hover,
+    .rating.active {
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .rating img {
+      width: 40px;
+    }
+
+    .rating small {
+      color: #fff;
+      display: inline-block;
+      margin: 10px 0 0;
+    }
+
+    .rating:hover small,
+    .rating.active small {
+      color: #8f94fb;
+    }
+
+    .btn {
+      background-color: #8f94fb;
+      color: #000;
+      border: 0;
+      border-radius: 4px;
+      padding: 12px 30px;
+      cursor: pointer;
+    }
+
+    .btn:focus {
+      outline: 0;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .credit a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .credit {
+      text-align: center;
+      margin-top: 20px;
+      color: #fff;
+    }
+
+    .success-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .success-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #004aad;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .success-btn:hover {
+      background-color: #00338d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="success-container">
+    <h1>Payment Proof Uploaded Successfully!</h1>
+    <p>We’ll verify and email your Order details shortly.</p>
+
+    <!-- Go to Home Button -->
+    <div style="margin-top: 20px;">
+      <a href="{% url 'home' %}" class="success-btn">
+        Go to Home
+      </a>
+    </div>
+  </div>
+
+  <div id="panel" class="panel-container">
+    <strong>How satisfied are you with our customer support performance?</strong>
+    <div class="ratings-container">
+      <div class="rating">
+        <img src="{% static 'images/sad.png' %}" alt="Unhappy">
+        <small>Unhappy</small>
+      </div>
+
+      <div class="rating">
+        <img src="{% static 'images/neutral.png' %}" alt="Neutral"/>
+        <small>Neutral</small>
+      </div>
+
+      <div class="rating active">
+        <img src="https://cdn-icons-png.flaticon.com/512/1998/1998799.png" alt="Satisfied"/>
+        <small>Satisfied</small>
+      </div>
+    </div>
+    <button class="btn" id="send">Send Review</button>
+  </div>
+
+  <script>
+    const ratings = document.querySelectorAll('.rating');
+    const ratingsContainer = document.querySelector('.ratings-container');
+    const sendBtn = document.querySelector('#send');
+    const panel = document.querySelector('#panel');
+    let selectedRating = 'Satisfied';
+
+    ratingsContainer.addEventListener('click', (e) => {
+      if (e.target.closest('.rating')) {
+        removeActive();
+        const rating = e.target.closest('.rating');
+        rating.classList.add('active');
+        selectedRating = rating.querySelector('small').innerText;
+      }
+    });
+
+    sendBtn.addEventListener('click', () => {
+      panel.innerHTML = `
+        <strong>Thank You!</strong>
+        <br><br>
+        <p>Feedback: <strong>${selectedRating}</strong></p>
+        <p>We'll use your feedback to improve our customer support.</p>
+      `;
+    });
+
+    function removeActive() {
+      ratings.forEach(rating => rating.classList.remove('active'));
+    }
+  </script>
+
+</body>
+</html>
